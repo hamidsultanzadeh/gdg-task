@@ -2,16 +2,16 @@ package com.hamidsultanzadeh.supplier.dto;
 
 import java.util.List;
 
-public class OrderDto {
+public class ProductOrderDto {
 
     Integer id;
     Integer quantity;
     ProductDto product;
 
-    public OrderDto() {
+    public ProductOrderDto() {
     }
 
-    public OrderDto(Integer id, Integer quantity, ProductDto product) {
+    public ProductOrderDto(Integer id, Integer quantity, ProductDto product) {
         this.id = id;
         this.quantity = quantity;
         this.product = product;

@@ -3,9 +3,9 @@ package com.hamidsultanzadeh.supplier.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Table(name = "order")
+@Table(name = "product_order")
 @Entity
-public class Order implements Serializable {
+public class ProductOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -17,19 +17,15 @@ public class Order implements Serializable {
     @Basic(optional = false)
     @Column(name = "quantity")
     private Integer quantity;
-    @Basic(optional = false)
-    @Column(name = "cost")
-    private Integer cost;
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Product productId;
 
-    public Order() {
+    public ProductOrder() {
     }
 
-    public Order(Integer quantity, Integer cost, Product productId) {
+    public ProductOrder(Integer quantity,Product productId) {
         this.quantity = quantity;
-        this.cost = cost;
         this.productId = productId;
     }
 
@@ -47,14 +43,6 @@ public class Order implements Serializable {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    public Integer getCost() {
-        return cost;
-    }
-
-    public void setCost(Integer cost) {
-        this.cost = cost;
     }
 
     public Product getProductId() {
