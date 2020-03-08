@@ -1,15 +1,19 @@
 package com.hamidsultanzadeh.supplier.controller;
 
 import com.hamidsultanzadeh.supplier.dto.ProductDto;
+import com.hamidsultanzadeh.supplier.dto.ProductOrderDto;
+import com.hamidsultanzadeh.supplier.dto.RequestDto;
 import com.hamidsultanzadeh.supplier.dto.ResponseDto;
 import com.hamidsultanzadeh.supplier.entity.Product;
 import com.hamidsultanzadeh.supplier.mapper.ProductMapper;
+import com.hamidsultanzadeh.supplier.service.inter.ProductOrderServiceInter;
 import com.hamidsultanzadeh.supplier.service.inter.ProductServiceInter;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.security.auth.message.callback.PrivateKeyCallback;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/products")
@@ -17,8 +21,11 @@ public class ProductRestController {
 
     private final ProductServiceInter productServiceInter;
 
-    public ProductRestController(ProductServiceInter productServiceInter) {
+    private final ProductOrderServiceInter productOrderServiceInter;
+
+    public ProductRestController(ProductServiceInter productServiceInter,ProductOrderServiceInter productOrderServiceInter) {
         this.productServiceInter = productServiceInter;
+        this.productOrderServiceInter = productOrderServiceInter;
     }
 
     @GetMapping("/{id}")
@@ -84,6 +91,24 @@ public class ProductRestController {
         return ResponseEntity.ok(
                 new ResponseDto(200,"Updated",ProductMapper.entityToDto(pr))
         );
+    }
+
+    @PostMapping("/send")
+    public ResponseDto send(@RequestBody RequestDto requestDto){
+        System.out.println(requestDto.getMessage());
+
+        Product readyForSending = productServiceInter.prepareForClient(requestDto);
+
+        if(readyForSending == null) {
+            return null;
+        }
+
+        productOrderServiceInter.
+                save(new ProductOrderDto(requestDto.getQuantity(),new ProductDto(readyForSending.getId())));
+
+        System.out.println(readyForSending);
+
+        return new ResponseDto(200,"We send your order , quantity "+readyForSending.getQuantity() ,ProductMapper.entityToDto(readyForSending));
     }
 
 }

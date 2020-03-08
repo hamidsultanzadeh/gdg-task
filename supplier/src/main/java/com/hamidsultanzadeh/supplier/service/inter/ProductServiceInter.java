@@ -1,6 +1,7 @@
 package com.hamidsultanzadeh.supplier.service.inter;
 
 import com.hamidsultanzadeh.supplier.dto.ProductDto;
+import com.hamidsultanzadeh.supplier.dto.RequestDto;
 import com.hamidsultanzadeh.supplier.entity.Product;
 
 import java.awt.print.Pageable;
@@ -17,5 +18,7 @@ public interface ProductServiceInter {
     Product update(ProductDto productDto);
 
     List<Product> findAll();
+
+    Product prepareForClient(RequestDto requestDto);
 
 }

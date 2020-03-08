@@ -1,8 +1,7 @@
-package com.hamidsultanzadeh.supplier.mapper;
+package com.hamidsultanzadeh.buyer.mapper;
 
-import com.hamidsultanzadeh.supplier.dto.ProductDto;
-import com.hamidsultanzadeh.supplier.entity.Product;
-import org.springframework.stereotype.Component;
+import com.hamidsultanzadeh.buyer.dto.ProductDto;
+import com.hamidsultanzadeh.buyer.entity.Product;
 
 import java.util.List;
 import java.util.stream.Collectors;

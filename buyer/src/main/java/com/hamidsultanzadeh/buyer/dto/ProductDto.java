@@ -1,4 +1,4 @@
-package com.hamidsultanzadeh.supplier.dto;
+package com.hamidsultanzadeh.buyer.dto;
 
 public class ProductDto {
 

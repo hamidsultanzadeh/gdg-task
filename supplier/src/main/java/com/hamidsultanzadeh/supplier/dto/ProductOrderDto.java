@@ -11,6 +11,11 @@ public class ProductOrderDto {
     public ProductOrderDto() {
     }
 
+    public ProductOrderDto(Integer quantity, ProductDto product) {
+        this.quantity = quantity;
+        this.product = product;
+    }
+
     public ProductOrderDto(Integer id, Integer quantity, ProductDto product) {
         this.id = id;
         this.quantity = quantity;

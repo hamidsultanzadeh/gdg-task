@@ -35,7 +35,7 @@ public class ProductOrderRestController {
     public ResponseEntity<ResponseDto> save(@RequestBody ProductOrderDto productOrderDto){
         ProductOrder productOrder = productOrderServiceInter.save(productOrderDto);
 
-        if(productOrder == null) return ResponseEntity.ok(new ResponseDto(404,"Failed",null));
+        if(productOrder == null) return ResponseEntity.ok(new ResponseDto(500,"Failed",null));
 
         return ResponseEntity.ok(
                 new ResponseDto(200,"Added", ProductOrderMapper.entityToDto(productOrder))

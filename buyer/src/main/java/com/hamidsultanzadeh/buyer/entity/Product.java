@@ -1,4 +1,4 @@
-package com.hamidsultanzadeh.supplier.entity;
+package com.hamidsultanzadeh.buyer.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,9 +28,6 @@ public class Product implements Serializable {
     @Column(name = "product_code")
     private Integer productCode;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
-    private List<ProductOrder> ordersList;
-
     public Product() {
     }
 
@@ -39,14 +36,6 @@ public class Product implements Serializable {
         this.quantity = quantity;
         this.cost = cost;
         this.productCode = productCode;
-    }
-
-    public Product(String name, Integer quantity, Integer cost,Integer productCode, List<ProductOrder> ordersList) {
-        this.name = name;
-        this.quantity = quantity;
-        this.cost = cost;
-        this.productCode = productCode;
-        this.ordersList = ordersList;
     }
 
     public Integer getId() {
@@ -81,27 +70,11 @@ public class Product implements Serializable {
         this.cost = cost;
     }
 
-    public List<ProductOrder> getOrdersList() {
-        return ordersList;
-    }
-
-    public void setOrdersList(List<ProductOrder> ordersList) {
-        this.ordersList = ordersList;
-    }
-
     public Integer getProductCode() {
         return productCode;
     }
 
     public void setProductCode(Integer productCode) {
         this.productCode = productCode;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "name='" + name + '\'' +
-                ", quantity=" + quantity +
-                '}';
     }
 }
